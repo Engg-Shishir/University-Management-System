@@ -1,225 +1,368 @@
+
 package university.management.system;
 
 import java.awt.*;
+import java.awt.Image;
 import java.awt.event.*;
-import java.util.Random;
-import javax.swing.*;
 
-class AddStudent implements ActionListener{
+import javax.swing.*;
+import javax.swing.filechooser.*;
+import javax.swing.border.Border;
+
+import java.io.*;
+import java.nio.file.*;
+
+
+
+
+
+
+public class AddStudent extends JFrame implements  ActionListener{
 
     JFrame f;
-    JLabel id,id1,id2,id3,id4,id5,id6,id7,id8,id9,id10,id11,id12,id15,id16,id17,lab,lab1,lab2;
-    JTextField t,t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,t11,t12,t13;
-    JButton b,b1,b2,b3;
-    JComboBox c1,c2;
+    JLabel file,title,student,background,name,fname,mname,roll,reg,dob,email,addr,fac,phone,hall,image,nid,blood;
+    JTextField nameVal,fnameVal,mnameVal,rollVal,regVal,dobVal,emailVal,addrVal,phoneVal,imageVal,nidVal;
+    JButton submit,close,closeBtn;
+    JComboBox faculty,hallSelect,bloodSelect;
     
-      
-    Random ran = new Random();
-    long first4 = (ran.nextLong() % 9000L) + 1000L;
-    long first = Math.abs(first4);
-    
+    String photoPath="", imgExtention="";
     
 
     public AddStudent(){
-        f = new JFrame("Add Student");
-        f.setBackground(Color.white);
-        f.setLayout(null);
+        
+        Border emptyBorder = BorderFactory.createEmptyBorder();
+        
+        background=new JLabel();
+        background.setBounds(0,0,1000,700);
+        background.setLayout(null);
+        background.setOpaque(true);
+        background.setBackground(new Color(0, 10, 66));
 
-        id15=new JLabel();
-        id15.setBounds(0,0,900,700);
-        id15.setLayout(null);
-        ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/fourth.jpg"));
-        Image i3 = img.getImage().getScaledInstance(1220, 700,Image.SCALE_DEFAULT);
+        student = new JLabel();
+        student.setBounds(150,-5,120,120);
+        ImageIcon img2 = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/student.gif"));
+        Image i32 = img2.getImage().getScaledInstance(120, 120,Image.SCALE_DEFAULT);
+        ImageIcon icc32 = new ImageIcon(i32);
+        student.setIcon(icc32);
+        background.add(student);
+        
+        
+        title = new JLabel("Add New Student");
+        title.setBounds(420,30,500,50);
+        title.setFont(new Font("serif",Font.ITALIC,35));
+        title.setForeground(Color.white);
+        background.add(title);
+        add(background);
+        
+        JSeparator sep = new JSeparator();  
+        sep.setOrientation(SwingConstants.HORIZONTAL);
+        sep.setBounds(220,80,600,50);
+        sep.setBackground(Color.white);
+        background.add(sep);  
+        
+        
+        //##################################################
+        name = new JLabel("Name :");
+        name.setBounds(100,150,100,30);
+        name.setFont(new Font("serif",Font.BOLD,20));
+        name.setForeground(Color.WHITE);
+        background.add(name);
+        //##################################################
+        fname= new JLabel("Father Name : ");
+        fname.setBounds(100,200,150,30);
+        fname.setFont(new Font("serif",Font.BOLD,20));
+        fname.setForeground(Color.WHITE);
+        background.add(fname);
+        //##################################################
+        mname= new JLabel("Mother Name : ");
+        mname.setBounds(100,250,150,30);
+        mname.setFont(new Font("serif",Font.BOLD,20));
+        mname.setForeground(Color.WHITE);
+        background.add(mname);
+        //##################################################
+        addr= new JLabel("Address : ");
+        addr.setBounds(100,300,150,30);
+        addr.setFont(new Font("serif",Font.BOLD,20));
+        addr.setForeground(Color.WHITE);
+        background.add(addr);
+        //##################################################
+        phone= new JLabel("Phone : ");
+        phone.setBounds(100,350,150,30);
+        phone.setFont(new Font("serif",Font.BOLD,20));
+        phone.setForeground(Color.WHITE);
+        background.add(phone);
+        //##################################################
+        nid= new JLabel("Nid No : ");
+        nid.setBounds(100,400,150,30);
+        nid.setFont(new Font("serif",Font.BOLD,20));
+        nid.setForeground(Color.WHITE);
+        background.add(nid);
+        //##################################################
+        image= new JLabel("Image : ");
+        image.setBounds(100,450,150,30);
+        image.setFont(new Font("serif",Font.BOLD,20));
+        image.setForeground(Color.WHITE);
+        background.add(image);
+        
+        //##################################################      
+        //##################################################   
+        //##################################################   
+        //##################################################   
+        nameVal=new JTextField("Your name"); 
+        nameVal.setBounds(260,150,200,30);
+        background.add(nameVal);
+        nameVal.addActionListener(this);
+        //################################################## 
+        fnameVal=new JTextField();
+        fnameVal.setBounds(260,200,200,30);
+        background.add(fnameVal);
+        //################################################## 
+        mnameVal=new JTextField();
+        mnameVal.setBounds(260,250,200,30);
+        background.add(mnameVal);
+        //################################################## 
+        addrVal=new JTextField();
+        addrVal.setBounds(260,300,200,30);
+        background.add(addrVal);
+        //################################################## 
+        phoneVal=new JTextField();
+        phoneVal.setBounds(260,350,200,30);
+        background.add(phoneVal);
+        //################################################## 
+        nidVal=new JTextField();
+        nidVal.setBounds(260,400,200,30);
+        background.add(nidVal);
+
+        
+        //################################################## 
+        file = new JLabel();
+        file.setBounds(420,450,30,30);
+        file.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        
+       ImageIcon f = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/Button/open-folder.png"));
+       Image i3f = f.getImage().getScaledInstance(30, 30,Image.SCALE_DEFAULT);
+       ImageIcon icc3f = new ImageIcon(i3f);
+       file.setIcon(icc3f);
+       background.add(file);
+        
+        file.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JFileChooser file = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                 int result = file.showSaveDialog(null);
+                    if(result == JFileChooser.APPROVE_OPTION){
+                        File selectedFile = file.getSelectedFile();
+                        photoPath = selectedFile.getAbsolutePath();
+                    }
+            }
+
+        });
+        
+
+        
+        //##################################################
+        roll = new JLabel("Roll No :");
+        roll.setBounds(500,150,200,30);
+        roll.setFont(new Font("serif",Font.BOLD,20));
+        roll.setForeground(Color.WHITE);
+        background.add(roll); 
+        //##################################################
+        reg = new JLabel("Registration No :");
+        reg.setBounds(500,200,200,30);
+        reg.setFont(new Font("serif",Font.BOLD,20));
+        reg.setForeground(Color.WHITE);
+        background.add(reg);  
+        //##################################################
+        dob = new JLabel("Birth Date :");
+        dob.setBounds(500,250,200,30);
+        dob.setFont(new Font("serif",Font.BOLD,20));
+        dob.setForeground(Color.WHITE);
+        background.add(dob); 
+        //##################################################
+        email = new JLabel("Enter email :");
+        email.setBounds(500,300,200,30);
+        email.setFont(new Font("serif",Font.BOLD,20));
+        email.setForeground(Color.WHITE);
+        background.add(email); 
+        //##################################################
+        fac = new JLabel("Chose your faculty :");
+        fac.setBounds(500,350,200,30);
+        fac.setFont(new Font("serif",Font.BOLD,20));
+        fac.setForeground(Color.WHITE);
+        background.add(fac); 
+        //##################################################
+        hall = new JLabel("Select Your Hall :");
+        hall.setBounds(500,400,200,30);
+        hall.setFont(new Font("serif",Font.BOLD,20));
+        hall.setForeground(Color.WHITE);
+        background.add(hall); 
+        //##################################################
+        blood = new JLabel("Blood group :");
+        blood.setBounds(500,450,200,30);
+        blood.setFont(new Font("serif",Font.BOLD,20));
+        blood.setForeground(Color.WHITE);
+        background.add(blood); 
+        
+        
+        //##################################################
+        rollVal=new JTextField(); 
+        rollVal.setBounds(700,150,200,30);
+        background.add(rollVal);
+        //##################################################
+        regVal=new JTextField(); 
+        regVal.setBounds(700,200,200,30);
+        background.add(regVal);
+        //##################################################
+        dobVal=new JTextField(); 
+        dobVal.setBounds(700,250,200,30);
+        background.add(dobVal);
+        //##################################################
+        emailVal=new JTextField(); 
+        emailVal.setBounds(700,300,200,30);
+        background.add(emailVal);
+        //##################################################
+        String facultys[] = {"Select Faculty","Computer Science & Engineering","Agriculture","Nutrion & Food Science","Mechanical","Civil"};
+        faculty = new JComboBox(facultys);
+        faculty.setBackground(Color.WHITE);
+        faculty.setBounds(700,350,200,30);
+        background.add(faculty);
+        //##################################################
+        String halls[] = {"Select your hall","Sher-E-Bangla-1","Sher-E-Bangla-2","Bangabandhu Shekh Muzib","Keramot Ali","Shekh Fazilatunneca Muzib","Sufiya Kamal"};
+        hallSelect = new JComboBox(halls);
+        hallSelect.setBackground(Color.WHITE);
+        hallSelect.setBounds(700,400,200,30);
+        background.add(hallSelect);
+        //##################################################
+        String bloods[] = {"Select blood group","B +","AB +","B -","O +","O +","AB +"};
+        bloodSelect = new JComboBox(bloods);
+        bloodSelect.setBackground(Color.WHITE);
+        bloodSelect.setBounds(700,450,200,30);
+        background.add(bloodSelect);
+        
+        submit = new JButton();
+        submit.setBounds(250,550,120,40);
+        submit.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ImageIcon submitBtn = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/Button/submit.png"));
+        Image submitBtnSize = submitBtn.getImage().getScaledInstance(130, 40,Image.SCALE_DEFAULT);
+        ImageIcon submitBtnIcon = new ImageIcon(submitBtnSize);
+        submit.setIcon(submitBtnIcon);
+        
+        submit.setBorder(emptyBorder);
+        background.add(submit);
+        
+        close = new JButton();
+        close.setBounds(550,550,130,40);
+        close.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ImageIcon closeBtns = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/Button/close.png"));
+        Image closeBtnSize = closeBtns.getImage().getScaledInstance(140, 40,Image.SCALE_DEFAULT);
+        ImageIcon closeBtnIcon = new ImageIcon(closeBtnSize);
+        close.setIcon(closeBtnIcon);
+                
+        close.setBorder(emptyBorder);
+        background.add(close);
+        
+        closeBtn = new JButton();
+        closeBtn.setBounds(900,30,30,30);
+        closeBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        ImageIcon img = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/Button/close1.png"));
+        Image i3 = img.getImage().getScaledInstance(30, 30,Image.SCALE_DEFAULT);
         ImageIcon icc3 = new ImageIcon(i3);
-        id15.setIcon(icc3);
-
-        id8 = new JLabel("New Student Details");
-        id8.setBounds(320,30,500,50);
-        id8.setFont(new Font("serif",Font.ITALIC,25));
-        id8.setForeground(Color.black);
-        id15.add(id8);
-        f.add(id15);
-
- 
-        id1 = new JLabel("Name");
-        id1.setBounds(50,150,100,30);
-        id1.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id1);
-
-        t1=new JTextField();
-        t1.setBounds(200,150,150,30);
-        id15.add(t1);
-
-        id2 = new JLabel("Father's Name");
-        id2.setBounds(400,150,200,30);
-        id2.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id2);
-
-        t2=new JTextField();
-        t2.setBounds(600,150,150,30);
-        id15.add(t2);
-
-        id3= new JLabel("Age");
-        id3.setBounds(50,200,100,30);
-        id3.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id3);
-
-        t3=new JTextField();
-        t3.setBounds(200,200,150,30);
-        id15.add(t3);
-
-        id4= new JLabel("DOB (dd/mm/yyyy)");  
-        id4.setBounds(400,200,200,30);
-        id4.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id4);
-
-        t4=new JTextField();
-        t4.setBounds(600,200,150,30);
-        id15.add(t4);
-
-        id5= new JLabel("Address");
-        id5.setBounds(50,250,100,30);
-        id5.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id5);
-
-        t5=new JTextField();
-        t5.setBounds(200,250,150,30);
-        id15.add(t5);
-
-        id6= new JLabel("Phone");
-        id6.setBounds(400,250,100,30);
-        id6.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id6);
-
-        t6=new JTextField();
-        t6.setBounds(600,250,150,30);
-        id15.add(t6);
-
-        id7= new JLabel("Email Id");
-        id7.setBounds(50,300,100,30);
-        id7.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id7);
-
-        t7=new JTextField();
-        t7.setBounds(200,300,150,30);
-        id15.add(t7);
-
-        id9= new JLabel("Class X(%)");
-        id9.setBounds(400,300,130,30);
-        id9.setFont(new Font("serif",Font.BOLD,20));    
-        id15.add(id9);
-
-        t8=new JTextField();
-        t8.setBounds(600,300,150,30);
-        id15.add(t8);
-
-        id10= new JLabel("Class XII(%)");
-        id10.setBounds(50,350,130,30);
-        id10.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id10);
-
-        t9=new JTextField();
-        t9.setBounds(200,350,150,30);
-        id15.add(t9);
-
-
-        id11= new JLabel("Aadhar No");
-        id11.setBounds(400,350,100,30);
-        id11.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id11);
-
-        t10=new JTextField();
-        t10.setBounds(600,350,150,30);
-        id15.add(t10);
-
-        id12= new JLabel("Roll No");
-        id12.setBounds(50,400,150,30);
-        id12.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id12);
-
-        t11=new JTextField();   
-        t11.setBounds(200,400,150,30);
-        t11.setText("1533"+first);
-        id15.add(t11);
-
-
-        lab=new JLabel("Course");
-        lab.setBounds(400,400,150,30);
-	lab.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(lab);
-            
-        String course[] = {"B.Tech","BBA","BCA","Bsc","Msc","MBA","MCA","BA","BCom"};
-        c1 = new JComboBox(course);
-        c1.setBackground(Color.WHITE);
-        c1.setBounds(600,400,150,30);
-        id15.add(c1);
+        closeBtn.setIcon(icc3);
+        closeBtn.setBorder(emptyBorder);
+        background.add(closeBtn);
         
-        lab2=new JLabel("Branch");
-        lab2.setBounds(50,450,150,30);
-	lab2.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(lab2);
         
-        String branch[] = {"Computer Science","Electronics","Electrical","Mechanical","Civil"};
-        c2 = new JComboBox(branch);
-        c2.setBackground(Color.WHITE);
-        c2.setBounds(200,450,150,30);
-        id15.add(c2);
-        
-        b = new JButton("Submit");
-        b.setBackground(Color.BLACK);
-        b.setForeground(Color.WHITE);
-        b.setBounds(250,550,150,40);
-        
-        id15.add(b);
 
-        b1=new JButton("Cancel");   
-        b1.setBackground(Color.BLACK);
-        b1.setForeground(Color.WHITE);
-        b1.setBounds(450,550,150,40);
         
-        id15.add(b1);
         
-        b.addActionListener(this);
-        b1.addActionListener(this);
         
-        f.setVisible(true);
-        f.setSize(900,700);
-        f.setLocation(400,150);
+        closeBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                  System.exit(0);
+            }
+
+        });
+        
+       
+        submit.addActionListener(this);
+        close.addActionListener(this);
+       
+       
+        setUndecorated(true);
+        setVisible(true);
+        setSize(1000,700);
+        setLocationRelativeTo(null); 
     }
-
+//name,fname,mname,roll,reg,dob,email,addr,fac,phone,hall,image,nid,blood
     public void actionPerformed(ActionEvent ae){
+        String name,fname,mname;
         
-        String a = t1.getText();
-        String bb = t2.getText();
-        String c = t3.getText();
-        String d = t4.getText();
-        String e = t5.getText();
-        String ff = t6.getText();
-        String g = t7.getText();
-        String h = t8.getText();
-        String i = t9.getText();
-        String j = t10.getText();
-        String k = t11.getText();
-        String l = (String)c1.getSelectedItem();
-        String m = (String)c2.getSelectedItem();
+        name = nameVal.getText();
+        fname = fnameVal.getText();
+        mname = mnameVal.getText();
+        String roll = rollVal.getText();
+        String reg =  regVal.getText();
+        String dob =  dobVal.getText();
+        String email = emailVal.getText();
+        String addr = addrVal.getText();
+        String fac = (String)faculty.getSelectedItem();
+        String phone = phoneVal.getText();
+        String hall = (String)hallSelect.getSelectedItem();
+        String nid =  nidVal.getText();
+        String blood = (String)bloodSelect.getSelectedItem();
+        String img = "";
         
-        if(ae.getSource() == b){
+        
+        if(ae.getSource() == submit){
+                
+            if(photoPath.length()>0){
+                // create object of Path
+                Path paths = Paths.get(photoPath);
+                // call getFileName() and get FileName path object
+                Path fileName = paths.getFileName();
+                img = fileName.toString();
+                int index = img.lastIndexOf('.');
+                if(index > 0) {
+                     imgExtention = img.substring(index + 1);
+                     img = roll+"."+imgExtention;
+                }
+            }
+      
+            
             try{
                 conn cc = new conn();
-                String q = "insert into student values('"+a+"','"+bb+"','"+c+"','"+d+"','"+e+"','"+ff+"','"+g+"','"+h+"','"+i+"','"+j+"','"+k+"','"+l+"','"+m+"')";
-                cc.s.executeUpdate(q);
-                JOptionPane.showMessageDialog(null,"Student Details Inserted Successfully");
-                f.setVisible(false);
+                if(name.equals("") || fname.equals("")|| mname.equals("")|| roll.equals("") || reg.equals("")|| dob.equals("")|| email.equals("")|| addr.equals("")|| fac.equals("")|| phone.equals("")|| hall.equals("")|| img.equals("")){
+
+                      new ToastAlert("Please insert carefully","warningToast.png","close1.png").setVisible(true);
+                }else{
+                    File src = new File(photoPath);
+                    File dest = new File("C:\\Users\\ASUS\\Documents\\NetBeansProjects\\University Management System\\src\\university\\management\\system\\Upload\\"+img);
+
+
+                    //   rename & Copy selected file                     
+                    try {
+                        Files.copy(src.toPath(), dest.toPath());
+                    } catch (IOException ex) {
+                        System.out.println("Exception is here");
+                    }
+                    
+                    String query = "INSERT INTO `student`(`name`, `fname`, `mname`, `addr`, `phone`, `nid`, `img`, `roll`, `reg`, `dob`, `email`, `fac`, `hall`, `blood`) VALUES ('"+name+"','"+fname+"','"+mname+"','"+addr+"','"+phone+"','"+nid+"','"+img+"','"+roll+"','"+reg+"','"+dob+"','"+email+"','"+fac+"','"+hall+"','"+blood+"')";
+                    int i = cc.s.executeUpdate(query);
+                    if(i==1){
+                      new ToastAlert("Student Added successfully","checkToast.png","delete2.png").setVisible(true);
+                        setVisible(false); 
+                    }
+                }            
             }catch(Exception ee){
                 System.out.println("The error is:"+ee);
             }
-        }else if(ae.getSource() == b1){
-            f.setVisible(false);
-            new Project().setVisible(true);
-            
+        }else{
+            System.exit(0);
         }
+
     }
     public static void main(String[ ] arg){
-        new AddStudent().f.setVisible(true);
+        new AddStudent().setVisible(true);
     }
 }

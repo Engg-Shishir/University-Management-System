@@ -10,7 +10,7 @@ public class Project extends JFrame implements ActionListener{
         
         setSize(1920,1030);
         
-        ImageIcon ic =  new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/third.jpg"));
+        ImageIcon ic =  new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/bsmrh.jpg"));
         Image i3 = ic.getImage().getScaledInstance(1900, 950,Image.SCALE_DEFAULT);
         ImageIcon icc3 = new ImageIcon(i3);
         JLabel l1 = new JLabel(icc3);
@@ -313,7 +313,7 @@ public class Project extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         String msg = ae.getActionCommand();
         if(msg.equals("New Student Admission")){
-            new AddStudent().f.setVisible(true);
+            new AddStudent().setVisible(true);
             
         }else if(msg.equals("New Faculty")){
             new AddTeacher().f.setVisible(true);

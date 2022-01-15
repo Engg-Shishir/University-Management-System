@@ -38,7 +38,7 @@ class Frame extends JFrame implements Runnable{
         try{
             Thread.sleep(7000);
             this.setVisible(false);
-            Login f1 = new Login();
+            Logins f1 = new Logins();
             
         }catch(Exception e){
             e.printStackTrace(); 

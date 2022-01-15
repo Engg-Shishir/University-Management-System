@@ -24,6 +24,7 @@ public class ToastAlert extends JFrame {
         background.setBounds(0,0,500,80);
         background.setLayout(null);
         background.setOpaque(true);
+        background.setCursor(new Cursor(Cursor.HAND_CURSOR));
 //        background.setBackground(new Color(0, 10, 66));
         
        checkMark = new JLabel();
@@ -49,7 +50,6 @@ public class ToastAlert extends JFrame {
         
        close = new JButton();
        close.setBounds(450,20,30,30);
-       close.setCursor(new Cursor(Cursor.HAND_CURSOR));
        ImageIcon closeIcon = new ImageIcon(ClassLoader.getSystemResource("university/management/system/icons/Button/"+cancle));
        Image img = closeIcon.getImage().getScaledInstance(30, 30,Image.SCALE_FAST);
        ImageIcon icon = new ImageIcon(img);

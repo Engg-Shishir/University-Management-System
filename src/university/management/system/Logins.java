@@ -11,7 +11,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.sql.*;
 
-public class Login extends JFrame implements ActionListener{
+public class Logins extends JFrame implements ActionListener{
 
     JFrame f;
     JLabel l1,l2;
@@ -19,7 +19,7 @@ public class Login extends JFrame implements ActionListener{
     JPasswordField t2;
     JButton b1,b2;
 
-    Login(){
+    Logins(){
 
         super("Login");
 
@@ -97,6 +97,6 @@ public class Login extends JFrame implements ActionListener{
         }
     }
     public static void main(String[] arg){
-        Login l = new Login();
+        Logins l = new Logins();
     }
 }
